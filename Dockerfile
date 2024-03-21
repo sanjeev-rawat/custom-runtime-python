@@ -1,4 +1,4 @@
-FROM public.ecr.aws/lambda/provided:al2-x86_64
+FROM public.ecr.aws/lambda/provided:al2.2024.03.04.09
 
 # Install SSL Li
 WORKDIR /tmp
@@ -40,7 +40,5 @@ RUN python3.11 -m pip install -r ${LAMBDA_TASK_ROOT}/requirements.txt -t ${LAMBD
 # Copy function code
 COPY lambda_function.py ${LAMBDA_TASK_ROOT}/lambda_function.py
 
-RUN python3.11 -m pip install requests
-
 # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
-CMD [ "bootstrap" ]
+CMD [ "lambda_function.handler" ]
